@@ -17,16 +17,12 @@ defmodule Words do
   defp do_count(sentence, word_counts) do
     case pop_word(sentence) do
       {matched_word, remaining_sentence} ->
-        {_get, updated_word_counts} =
-          Map.get_and_update(
-            word_counts,
+        updated_word_counts =
+          word_counts
+          |> Map.update(
             String.downcase(matched_word),
-            fn current_value ->
-              case current_value do
-                nil -> {current_value, 1}
-                _word_count -> {current_value, current_value + 1}
-              end
-            end
+            1,
+            &(&1 + 1)
           )
 
         do_count(remaining_sentence, updated_word_counts)
