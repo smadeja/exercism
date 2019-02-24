@@ -1,6 +1,6 @@
 defmodule Integer.Guards do
-  defguard is_lowercase(value) when value in 97..122
-  defguard is_uppercase(value) when value in 65..90
+  defguard is_lowercase(value) when value in ?a..?z
+  defguard is_uppercase(value) when value in ?A..?Z
 end
 
 defmodule RotationalCipher do
@@ -30,11 +30,11 @@ defmodule RotationalCipher do
   @spec encode_letter(integer(), integer()) :: integer()
 
   defp encode_letter(letter, shift) when is_lowercase(letter) do
-    ((letter - 97 + shift) |> Integer.mod(26)) + 97
+    ((letter - ?a + shift) |> Integer.mod(26)) + ?a
   end
 
   defp encode_letter(letter, shift) when is_uppercase(letter) do
-    ((letter - 65 + shift) |> Integer.mod(26)) + 65
+    ((letter - ?A + shift) |> Integer.mod(26)) + ?A
   end
 
   defp encode_letter(letter, _shift), do: letter
