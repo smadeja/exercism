@@ -19,13 +19,13 @@ defmodule RotationalCipher do
   end
 
   @spec do_rotate(String.t(), integer(), String.t()) :: String.t()
-  defp do_rotate(text, shift, result \\ "")
+  defp do_rotate(text, shift, accumulator \\ "")
 
-  defp do_rotate(<<text_head>> <> text_tail, shift, result) do
-    do_rotate(text_tail, shift, result <> <<encode_letter(text_head, shift)>>)
+  defp do_rotate(<<text_head>> <> text_tail, shift, accumulator) do
+    do_rotate(text_tail, shift, accumulator <> <<encode_letter(text_head, shift)>>)
   end
 
-  defp do_rotate("", _shift, result), do: result
+  defp do_rotate("", _shift, accumulator), do: accumulator
 
   @spec encode_letter(integer(), integer()) :: integer()
 
